@@ -4,14 +4,36 @@ const posts = require('../data/posts');
 
 // funzioni CRUD
 function index(req, res) {
-    res.json(posts);
+    
+    let postsFilter = posts;
+    
+    // aggiungere filtro di ricerca per i tag
+    if(req.query.tag) {
+        postsFilter = posts.filter(post => post.tags.includes(req.query.tag));
+    }
+
+    // post filtrati od originali
+
+    res.json(postsFilter);
 }
 
 function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
+
+
+    if(!post) {
+        res.status(404);
+
+        return res.json({
+            status: 404,
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
     res.json(post);
 }
+
 
 function store(req, res) {
     res.send('Creare un nuovo post')
@@ -29,16 +51,25 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const id = parseInt(req.params.id);
-    const post = posts.findIndex(post => post.id === id);
-    posts.splice(post, 1);
-    console.log(posts);
+    const post = posts.find(post => post.id === id);
+    
+    
+    // status error
+    if(!post) {
+        res.status(404);
 
-    if (post) {
-        res.status(204);
         return res.json({
-            status:204
+            status: 404,
+            error: 'Not found',
+            message: 'Post non trovato'
         })
     } 
+    
+    posts.splice(posts.indexOf(post), 1);
+    console.log(posts);
+    // cancellazione avvenuta con successso
+    res.sendStatus(204);
+
 }
 
 // esportare function
