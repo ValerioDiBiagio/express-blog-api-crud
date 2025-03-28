@@ -4,40 +4,29 @@ const express = require('express');
 // Router
 const router = express.Router();
 
+//controller
+const controllerPosts = require('../controllers/controller-posts');
+
+
 // rotte CRUD
 
 // index
-router.get('/', (req, res) => {
-    res.send('Lista dei post');
-})
+router.get('/', controllerPosts.index);
 
 // show
-router.get('/:id', (req, res) => {
-    const {id} = req.params;
-    res.send('Dettagli del post ' + id)
-})
+router.get('/:id', controllerPosts.show);
 
-// post
-router.post('/', (req, res) => {
-    res.send('Creare un nuovo post')
-})
+// store
+router.post('/', controllerPosts.store);
 
 // update
-router.put('/:id', (req, res) => {
-    const {id} = req.params;
-    res.send('Modifica integrale del post ' + id);
-})
+router.put('/:id', controllerPosts.update);
 
 // modify
-router.patch('/:id', (req, res)=> {
-    const {id} = req.params;
-    res.send('Modifica parziale del post ' + id);
-})
+router.patch('/:id', controllerPosts.modify);
 
 // destroy
-router.delete('/:id', (req, res) => {
-    const {id} = req.params;
-    res.send('Eliminazione del post ' + id);
-})
+router.delete('/:id', controllerPosts.destroy);
 
+// esportare router
 module.exports = router
