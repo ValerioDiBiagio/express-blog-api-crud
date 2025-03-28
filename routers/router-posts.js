@@ -37,5 +37,7 @@ router.patch('/:id', (req, res)=> {
 // destroy
 router.delete('/:id', (req, res) => {
     const {id} = req.params;
-    res.send('eliminazione del post ' + id);
+    res.send('Eliminazione del post ' + id);
 })
+
+module.exports = router
