@@ -4,12 +4,13 @@ const posts = require('../data/posts');
 
 // funzioni CRUD
 function index(req, res) {
-    res.send('Lista dei post');
+    res.json(posts);
 }
 
 function show(req, res) {
-    const {id} = req.params;
-    res.send('Dettagli del post ' + id)
+    const id = parseInt(req.params.id);
+    const post = posts.find(post => post.id === id);
+    res.json(post);
 }
 
 function store(req, res) {
@@ -27,8 +28,17 @@ function modify(req, res) {
 }
 
 function destroy(req, res) {
-    const {id} = req.params;
-    res.send('Eliminazione del post ' + id);
+    const id = parseInt(req.params.id);
+    const post = posts.findIndex(post => post.id === id);
+    posts.splice(post, 1);
+    console.log(posts);
+
+    if (post) {
+        res.status(204);
+        return res.json({
+            status:204
+        })
+    } 
 }
 
 // esportare function
