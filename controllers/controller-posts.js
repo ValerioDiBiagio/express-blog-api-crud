@@ -1,3 +1,7 @@
+//importare posts
+const posts = require('../data/posts');
+
+
 // funzioni CRUD
 function index(req, res) {
     res.send('Lista dei post');
