@@ -39,6 +39,27 @@ function store(req, res) {
     
     //stampare i dati in arrivo
     console.log(req.body);
+    
+    // creazione del nuovo id incrementando l'id dell'ultimo elemento
+    const newId = posts[posts.length - 1].id + 1;
+    
+    // creazione del nuovo post
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        tags: req.body.tags
+    }
+
+    // aggiungere il nuovo post all'array contenente tutti i post
+    posts.push(newPost);
+
+    console.log(posts);
+
+    // impostare lo status corretto
+    res.status(201)
+    // restituire il nuovo post in json
+    res.json(newPost)
 }
 
 function update(req, res) {
