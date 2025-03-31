@@ -36,7 +36,9 @@ function show(req, res) {
 
 
 function store(req, res) {
-    res.send('Creare un nuovo post')
+    
+    //stampare i dati in arrivo
+    console.log(req.body);
 }
 
 function update(req, res) {

@@ -7,6 +7,8 @@ const router = express.Router();
 //controller
 const controllerPosts = require('../controllers/controller-posts');
 
+// registrazione body-parser
+router.use(express.json());
 
 // rotte CRUD
 
