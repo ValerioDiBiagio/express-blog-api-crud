@@ -63,13 +63,52 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    const {id} = req.params;
-    res.send('Modifica integrale del post ' + id);
+        
+    const id = parseInt(req.params.id);
+    const post = posts.find(post => post.id === id);
+
+    console.log(post)
+
+    // post modificato
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    console.log(post)
+
+    // restituire il post modificato 
+    res.json(post);
 }
 
 function modify(req, res) {
-    const {id} = req.params;
-    res.send('Modifica parziale del post ' + id);
+    
+    const id = parseInt(req.params.id);
+    const post = posts.find(post => post.id === id);
+
+    // modifichiamo il singolo elemento di un post
+    if (req.body.title) {
+        post.title = req.body.title;
+    }
+
+    if (req.body.content) {
+        post.content = req.body.content;
+    }
+
+    if (req.body.image) {
+        post.image = req.body.image;
+    }
+
+    if (req.body.tags) {
+        post.tags = req.body.tags;
+    }
+
+    console.log(post);
+
+    // restituire la modifica del post
+    res.json(post);
+
+    
 }
 
 function destroy(req, res) {
