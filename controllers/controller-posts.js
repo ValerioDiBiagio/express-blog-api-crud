@@ -21,7 +21,7 @@ function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
 
-
+    // status error
     if(!post) {
         res.status(404);
 
@@ -67,6 +67,17 @@ function update(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
 
+    // status error
+    if(!post) {
+        res.status(404);
+
+        return res.json({
+            status: 404,
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
+
     console.log(post)
 
     // post modificato
@@ -85,6 +96,17 @@ function modify(req, res) {
     
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
+
+    // status error
+    if(!post) {
+        res.status(404);
+
+        return res.json({
+            status: 404,
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
 
     // modifichiamo il singolo elemento di un post
     if (req.body.title) {
@@ -107,8 +129,6 @@ function modify(req, res) {
 
     // restituire la modifica del post
     res.json(post);
-
-    
 }
 
 function destroy(req, res) {
@@ -131,7 +151,6 @@ function destroy(req, res) {
     console.log(posts);
     // cancellazione avvenuta con successso
     res.sendStatus(204);
-
 }
 
 // esportare function
