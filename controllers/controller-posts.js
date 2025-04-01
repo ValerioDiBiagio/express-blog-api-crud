@@ -4,6 +4,7 @@ const posts = require('../data/posts');
 
 // funzioni CRUD
 function index(req, res) {
+    // valerio.get(); verificare errore 500 in postman
     
     let postsFilter = posts;
     
@@ -13,7 +14,6 @@ function index(req, res) {
     }
 
     // post filtrati od originali
-
     res.json(postsFilter);
 }
 

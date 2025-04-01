@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+// middleware
+const notFound = require('./middlewares/middleware404');
+const errorHandler = require('./middlewares/middleware500');
+
 // registrazione body-parser
 app.use(express.json());
 
@@ -22,3 +26,7 @@ app.listen(port, () => {
 app.get('/', (req, res) => {
     res.send('Sono nella hompage');
 })
+
+// richiamare funzioni middleware
+app.use(errorHandler);
+app.use(notFound);
